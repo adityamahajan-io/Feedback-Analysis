@@ -10,7 +10,7 @@
     <script src="/js/pdf.js"></script>
     <script>
         function print(quality = 3) {
-            const filename  = 'ThisIsYourPDFFilename.pdf';
+            const filename  = '<%=details.code%>_<%=details.title%>_<%=details.name%>';
             html2canvas(document.querySelector('#report'), 
                         {scale: quality, width:1150},
                         ).then(canvas => {
@@ -24,8 +24,12 @@
     </script>
 </head>
 <body style="overflow: scroll;">
-<button onclick="print()">Download as PDF</button>
-<div class="container" id="report" style="width: 1150px;">
+<div style="text-align: center; margin-top: 50px; margin-bottom: 50px;">
+    <button style="margin: 0 6px; padding: 20px;" class="btn btn-success" onclick="print()">Save as PDF</button>
+    <a href="/"><button style="margin: 0 6px; padding: 20px;" class="btn btn-primary">Generate Another Report</button></a>
+</div>
+
+<div class="container" id="report" style="min-width: 1150px;">
     
     <!--TABLE Header Start-->
     <div class="row">

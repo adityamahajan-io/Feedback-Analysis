@@ -25,8 +25,8 @@ var upload = multer({
         
         if (mimetype && extname==".csv") { 
             return cb(null, true); 
-        } 
-      
+        }
+        
         cb("Error: File upload only supports the "
                 + "following filetypes - CSV"); 
       }  

@@ -1,3 +1,13 @@
+function checkExtension(){
+    var fileName = document.getElementById("inputFile").value
+    var extension = fileName.split(".").pop()
+    if(extension != "csv"){
+        alert("Only .csv files are supported as input")
+        window.location.reload()
+    }
+    
+}
+
 function submitDetails(){
     const name = document.getElementsByName("name")[0].value.trim()
     const prog = document.getElementsByName("prog")[0].value.trim()
