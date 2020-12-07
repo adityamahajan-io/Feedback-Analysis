@@ -6,21 +6,27 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/analysis.css">
-    <script src="/js/html2pdf.js"></script>
+    <script src="/js/html2canvas.js"></script>
+    <script src="/js/pdf.js"></script>
     <script>
-        function generatePDF() {
-        // Choose the element that our invoice is rendered in.
-        const element = document.getElementById("report");
-        // Choose the element and save the PDF for our user.
-        html2pdf()
-          .from(element)
-          .save();
-      }
+        function print(quality = 3) {
+            const filename  = 'ThisIsYourPDFFilename.pdf';
+            html2canvas(document.querySelector('#report'), 
+                        {scale: quality, width:1150},
+                        ).then(canvas => {
+                
+                let pdf = new jsPDF('p', 'mm', 'a4');
+                const image_height = (180 / canvas.width) * canvas.height; 
+                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 15, 20, 180, image_height);
+                pdf.save(filename);
+            });
+	    }
     </script>
 </head>
-<body id="report">
-<div class="container">
-    <button onclick="generatePDF()">Download as PDF</button>
+<body style="overflow: scroll;">
+<button onclick="print()">Download as PDF</button>
+<div class="container" id="report" style="width: 1150px;">
+    
     <!--TABLE Header Start-->
     <div class="row">
         <div class="col-1 divCenter" style="padding-left:50px"><img src="/img/logo.png" style="height: 100px;"></div>
