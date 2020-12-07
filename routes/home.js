@@ -7,9 +7,10 @@ const bodyParser = require("body-parser")
 
 router.use(bodyParser.json())
 
+var uploadsPath = path.join(__dirname, "../uploads")
 var storage = multer.diskStorage({ 
     destination: function (req, file, cb) { 
-        cb(null, "uploads") 
+        cb(null, uploadsPath) 
     }, 
     filename: function (req, file, cb) { 
       cb(null, "data.csv") 
@@ -37,7 +38,7 @@ var upload = multer({
 
 router.get("/", (req,res)=>{
     const csv = require('csv-parser')
-    const detailsFile = "options/details.csv"
+    const detailsFile = path.join(__dirname, "../options/details.csv")
     const details = []
     fs.createReadStream(detailsFile)
     .pipe(csv())
@@ -51,7 +52,7 @@ router.get("/", (req,res)=>{
 router.post("/confirmDetails", (req,res)=>{
     const createCsvWriter = require('csv-writer').createObjectCsvWriter;
     const csvWriter = createCsvWriter({
-        path: 'options/details.csv',
+        path: path.join(__dirname, "../options/details.csv"),
         header: [
             {id: 'name', title: 'name'},
             {id: 'prog', title:'prog'},

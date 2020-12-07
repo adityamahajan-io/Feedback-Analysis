@@ -9,11 +9,11 @@ const { count } = require("console")
 
 
 router.get("/", (req,res)=>{
-    const questionsFile = "options/questions.csv"
+    const questionsFile = path.join(__dirname, "../options/questions.csv")
     const questionsWeights = []
     var questions = []
     var weights = []
-    const detailsFile = "options/details.csv"
+    const detailsFile = path.join(__dirname, "../options/details.csv")
     const details = []
 
     fs.createReadStream(detailsFile)
@@ -41,7 +41,8 @@ router.get("/", (req,res)=>{
 
     function analyseReport(){
         const feedback = []
-        const file = "uploads/data.csv"
+        const file = path.join(__dirname, "../uploads/data.csv")
+        console.log(file)
         fs.createReadStream(file)
         .pipe(csv())
         .on('data', (data) => feedback.push(data))
