@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/analysis.css">
+    <script src="/js/html2pdf.js"></script>
+    <script>
+        function generatePDF() {
+        // Choose the element that our invoice is rendered in.
+        const element = document.getElementById("report");
+        // Choose the element and save the PDF for our user.
+        html2pdf()
+          .from(element)
+          .save();
+      }
+    </script>
+</head>
+<body id="report">
+<div class="container">
+    <button onclick="generatePDF()">Download as PDF</button>
+    <!--TABLE Header Start-->
+    <div class="row">
+        <div class="col-1 divCenter" style="padding-left:50px"><img src="/img/logo.png" style="height: 100px;"></div>
+        <div class="col-11" style="text-align: center; font-size: 1.3rem;">
+            <strong>GOVERNMENT COLLEGE OF ENGINEERING, KARAD</strong><br>
+            VIDYANAGAR, KARAD, 415124 DIST SATARA <br>
+            Phone – ( 02164 ) 326632, 272414/15 Fax No. – ( 02164 )271713 <br>
+            Website : www.gcekarad.ac.in Email : principalgcekarad@gmail.com <br>
+        </div>
+    </div>
+    <hr style="border-top: 2px solid black;">
+    <div style="text-align: center; padding-top: 5px; font-size: 1.5rem;">
+        <strong><u>Feedback Report</u></strong>
+    </div>
+    <div class="row" style="padding-top: 20px;">
+        <div class="col"><strong>Programme:</strong>&nbsp;<%=details.prog%></div>
+        <div class="col"><strong>Department:</strong>&nbsp;<%=details.dept%></div>
+    </div>
+    <div class="row">
+        <div class="col"><strong>Academic Year:</strong>&nbsp;<%=details.ay%></div>
+        <div class="col"><strong>Semester:</strong>&nbsp;<%=details.sem%></div>
+    </div>
+
+    <div class="row divBorder" style="margin-top: 25px; font-size: medium;">
+        <div class="col-2"><strong>Course Code:</strong></div>
+        <div class="col-3"><%=details.code%></div>
+        <div class="col-2"><strong>Course Teacher:</strong></div>
+        <div class="col-5"><%=details.name%></div>
+    </div>
+    <div class="row divBorder" style="font-size: medium;">
+        <div class="col-2"><strong>Course Title:</strong></div>
+        <div class="col-10"><%=details.title%></div>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <strong>Analysis:</strong>
+    </div>
+
+    <div class="row divBorder" style="text-align: center; font-weight: bold; margin-top: 5px;">
+        <div class="col-1 divCenter">Que No.</div>
+        <div class="col-4 divCenter">Question Text</div>
+        <div class="col-1 divCenter" style="font-size: medium;">Que. Wt. (wi)</div>
+        <div class="col-5" style="text-align: center;">
+            Number Of <br>
+            <div class="row divBorder" style="height: 100%;">
+                <div class="col" style="border-left: 0px; border-bottom: 0px;">1</div>
+                <div class="col" style="border-bottom: 0px;">2</div>
+                <div class="col" style="border-bottom: 0px;">3</div>
+                <div class="col" style="border-bottom: 0px;">4</div>
+                <div class="col" style="border-right: 0px;border-bottom: 0px;">5</div>
+            </div>
+        </div>
+        <div class="col-1 divCenter" style="font-size: medium;">Average (ai)</div>
+    </div>
+    <!--TABLE Header End-->
+
+    <!--TABLE CONTENTS START HERE-->
+    <%var j = 1
+      for(var i=0;i<questions.length;i++){ %>
+        <div class="row divBorder">
+        <div class="col-1 divCenter"><%=j++%></div>
+        <div class="col-4" style="text-align: left;"><%=questions[i]%></div>
+        <div class="col-1 divCenter"><%=weights[i]%></div>
+        <div class="col-1 divCenter"><%=counts[i][0]%></div>
+        <div class="col-1 divCenter"><%=counts[i][1]%></div>
+        <div class="col-1 divCenter"><%=counts[i][2]%></div>
+        <div class="col-1 divCenter"><%=counts[i][3]%></div>
+        <div class="col-1 divCenter"><%=counts[i][4]%></div>
+        <div class="col-1 divCenter"><%=parseFloat(avg[i]).toFixed(2)%></div>
+    </div>
+    <%}%>
+
+
+    <!--Suggestions Section-->
+    <div class="row divBorder">
+        <div class="col-1" style="text-align: center; padding: 0;">
+            <div style="border-bottom: 1px solid black;">
+                <%=j++%>
+            </div>
+            
+        </div>
+        <div class="col-8" style="padding: 0;">
+            <div style="border-bottom: 1px solid black; padding: 0 15px;">
+              Suggestions if any, to course teacher for improvement.
+            </div>
+        </div>
+        <div class="col-3 divBorder">
+            <div class="row" style="border: none; border-bottom: 1px solid black;">
+                <div class="col" style="font-size: small; text-align: center;">
+                    Score out of 10 = <br> 2* [SUM(wi * ai) / SUM (wi)]
+                </div>
+            </div>
+            <div class="row" style="border: none;text-align: center;">
+                <div class="col">
+                    <h2 style="font-weight: bold;"><%=parseFloat(totalSum).toFixed(2)%></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

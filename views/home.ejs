@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <div class="homeHeader">
+        Feedback Report Analysis
+    </div>
+    <div class="container">
+
+        
+        <form id="fileForm" action="/uploadFile" method="POST" enctype="multipart/form-data" style="margin: 0 auto; width: 40vw; margin-top: 30px;">
+            <div class="input-group" style="margin-top: 5px;">
+                <div class="custom-file">
+                  <input name="inputFile" type="file" class="custom-file-input" id="inputGroupFile01"
+                    aria-describedby="inputGroupFileAddon01">
+                  <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+            </div>   
+        </form>
+
+        <div style="margin: 0 auto; width: 40vw; margin-top: 20px; display: none;" id="detailsForm">
+            <hr>
+                <table class="detailsTable" style=" margin: 0 auto; margin-top: 10px;">
+                    <tr>
+                        <td><strong>Details:</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Course Teacher:</td>
+                        <td><input name="name" type="text" class="detailsInput" required></td>
+                    </tr>
+                    <tr>
+                        <td>Programme:</td>
+                        <td><input name="prog" value="<%=details.prog%>" type="text" class="detailsInput"></td>
+                    </tr>
+                    <tr>
+                        <td>Department:</td>
+                        <td><input name="dept" value="<%=details.dept%>" type="text" class="detailsInput"></td>
+                    </tr>
+                    <tr>
+                        <td>Academic Year:</td>
+                        <td><input name="ay" value="<%=details.ay%>" type="text" class="detailsInput"></td>
+                    </tr>
+                    <tr>
+                        <td>Semester:</td>
+                        <td><input name="sem" value="<%=details.sem%>" type="text" class="detailsInput"></td>
+                    </tr>
+                    <tr>
+                        <td>Course Code:</td>
+                        <td><input name="code" value="<%=details.code%>" type="text" class="detailsInput"></td>
+                    </tr>
+                    <tr>
+                        <td>Course  Title:</td>
+                        <td><input name="title" value="<%=details.title%>" type="text" class="detailsInput"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="padding-top: 15px;"><button id=confirmDetails style="background-color: lightgray;" class="btn btn-block" onclick="submitDetails()">Confirm Details</button></td>
+                    </tr>
+                </table>
+        </div>
+
+        <div id="finalSubmit" style="margin: 30px auto; width: 40vw; display: none;">
+            <hr>
+            <button class="btn btn-success btn-lg btn-block" onclick="submitFinal()">Generate Report</button>
+        </div>  
+
+    </div>
+    <script src="/js/jquery-3.5.1.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script type="text/javascript">
+        $('.custom-file input').change(function (e) {
+            if (e.target.files.length) {
+                $(this).next('.custom-file-label').html(e.target.files[0].name);
+            }
+            $('#detailsForm').css('display', 'block')
+        });
+    </script>
+    <script src="/js/formLogic.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+body{
+    font-size: larger;
+}
+.detailsTable > tr, td{
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+.detailsInput{
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: gray;
+}
+
+.detailsInput:focus{
+    border-color: blue;
+}
+
+.divEnd{
+    display: flex;
+    align-items: flex-end;
+}
+
+.homeHeader{
+    text-align: center;
+    color: white;
+    background-color: skyblue;
+    font-weight: bold;
+    font-size: 3rem;
+    padding: 20px 0;
+}
