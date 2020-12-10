@@ -76,7 +76,6 @@ router.post("/confirmDetails", (req,res)=>{
     ]
     csvWriter.writeRecords(records)       // returns a promise
         .then(() => {
-            console.log('...Done');
     });
         
     })

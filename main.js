@@ -5,7 +5,10 @@ require('./app.js')
 let mainWindow = null
 iconPath = path.join(__dirname, '/icon/icon.png');
 function main() {
-  mainWindow = new BrowserWindow({icon: iconPath})
+  mainWindow = new BrowserWindow({icon: iconPath, 
+                                  webPreferences: {
+                                  contextIsolation: true
+                                }})
   mainWindow.maximize()
   mainWindow.loadURL(`http://localhost:8000/`)
   mainWindow.on('close', event => {

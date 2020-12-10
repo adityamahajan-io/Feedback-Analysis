@@ -34,8 +34,12 @@ app.use("/analyse", analyseRoute)
 
 //------------------------------------------
 
+process.on('uncaughtException', err =>{
+    process.exit(1);
+})
+
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
-    console.log("Server running on port 8000")
+    console.log("Feedback Analysis App Running")
 })
 

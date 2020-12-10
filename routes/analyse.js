@@ -20,7 +20,6 @@ router.get("/", (req,res)=>{
     .pipe(csv())
     .on("data", (data)=>details.push(data))
     .on('end', ()=>{
-        console.log("Details loaded")
         readQuestions()   
     })
 
@@ -42,7 +41,6 @@ router.get("/", (req,res)=>{
     function analyseReport(){
         const feedback = []
         const file = path.join(__dirname, "../uploads/data.csv")
-        console.log(file)
         fs.createReadStream(file)
         .pipe(csv())
         .on('data', (data) => feedback.push(data))
